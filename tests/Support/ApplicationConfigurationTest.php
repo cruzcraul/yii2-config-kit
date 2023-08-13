@@ -28,7 +28,7 @@ class ApplicationConfigurationTest extends TestCase
      */
     protected $app;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -21,7 +21,7 @@ class StrTest extends TestCase
      */
     protected $str;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

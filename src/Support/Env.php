@@ -158,7 +158,7 @@ class Env implements EnvInterface
     {
         $this->checkForSpecificEnvironmentFile();
 
-        $dotEnv = new Dotenv($this->getEnvironmentPath(), $this->getEnvironmentFile());
+        $dotEnv = Dotenv::createUnsafeMutable($this->getEnvironmentPath(), $this->getEnvironmentFile());
 
         $dotEnv->load();
 
@@ -172,9 +172,10 @@ class Env implements EnvInterface
     {
         $this->checkForSpecificEnvironmentFile();
 
-        $dotEnv = new Dotenv($this->getEnvironmentPath(), $this->getEnvironmentFile());
+        #$dotEnv = new Dotenv($this->getEnvironmentPath(), $this->getEnvironmentFile());
+        $dotEnv = Dotenv::createUnsafeMutable($this->getEnvironmentPath(), $this->getEnvironmentFile());
 
-        $dotEnv->overload();
+        $dotEnv->safeLoad();
 
         $this->validateEnvironmentFile($dotEnv);
     }

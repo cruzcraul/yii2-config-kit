@@ -24,7 +24,7 @@ class EnvTest extends TestCase
      */
     protected $env;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
