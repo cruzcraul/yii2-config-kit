@@ -42,4 +42,11 @@ class ConfigurationTest extends TestCase
         $this->assertSame(Configuration::env(), Configuration::env());
         $this->assertSame(Configuration::app(), Configuration::app());
     }
+
+    public function testAddEnvironment()
+    {
+        Configuration::addEnvironment('demo');
+        $valid_environments = Configuration::env()->getValidEnvironments();
+        $this->assertContains('demo', $valid_environments);
+    }
 }

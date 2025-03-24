@@ -25,6 +25,9 @@ use Symfony\Component\Console\Input\ArgvInput;
  */
 class Env implements EnvInterface
 {
+
+    private static array $valid_environments = ['local', 'dev', 'prod', 'test', 'stage'];
+
     /**
      * The custom environment path defined by the developer.
      *
@@ -65,6 +68,23 @@ class Env implements EnvInterface
         $this->str = $str ?? new Str();
         if ($environmentPath) {
             $this->useEnvironmentPath($environmentPath);
+        }
+    }
+
+    public static function setValidEnvironments(array $valid_environments): void
+    {
+        self::$valid_environments = $valid_environments;
+    }
+
+    public static function getValidEnvironments(): array
+    {
+        return self::$valid_environments;
+    }
+
+    public static function addEnvironment(string $environment): void
+    {
+        if (! in_array($environment, self::getValidEnvironments(), true)) {
+            self::$valid_environments[] = $environment;
         }
     }
 
@@ -217,7 +237,7 @@ class Env implements EnvInterface
     {
         // YII
         $env->required('YII_DEBUG')->allowedValues(['', '0', '1', 'true', true, 'false', false]);
-        $env->required('YII_ENV')->allowedValues(['local', 'dev', 'prod', 'test', 'stage']);
+        $env->required('YII_ENV')->allowedValues(self::$valid_environments);
 
         // APP
         $env->required(['APP_NAME', 'APP_ADMIN_EMAIL', 'APP_NAME']);

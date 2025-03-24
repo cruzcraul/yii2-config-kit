@@ -99,4 +99,14 @@ class Configuration implements ConfigurationInterface
 
         return static::$container;
     }
+
+    /**
+     * @param string $environment
+     *
+     * @return void
+     */
+    public static function addEnvironment(string $environment): void
+    {
+        self::env()->addEnvironment($environment);
+    }
 }
